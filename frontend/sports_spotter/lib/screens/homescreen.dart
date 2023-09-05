@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sports_spotter/components/alerts.dart';
+import 'package:sports_spotter/components/events_calandar.dart';
 import 'package:sports_spotter/components/home.dart';
 import 'package:sports_spotter/constants.dart';
 
@@ -28,15 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: IndexedStack(
         index: navIndex,
-        children: [
-          const Home(),
-          Container(
-            color: Colors.indigo,
-          ),
-          Container(
-            color: Colors.green,
-          ),
-        ],
+        children: const [Home(), EventsCalandar(), Alerts()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navIndex,
