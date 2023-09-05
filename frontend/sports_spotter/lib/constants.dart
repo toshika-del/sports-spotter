@@ -13,3 +13,7 @@ const space8 = SizedBox(
   height: 8,
   width: 8,
 );
+const space16 = SizedBox(
+  height: 16,
+  width: 16,
+);
