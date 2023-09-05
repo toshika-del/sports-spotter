@@ -11,8 +11,11 @@ class App extends StatelessWidget {
       title: title,
       home: const HomeScreen(),
       theme: ThemeData(
-        useMaterial3: false,
-      ),
+          useMaterial3: false,
+          cardTheme: CardTheme(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              elevation: 4)),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sports_spotter/components/home.dart';
 import 'package:sports_spotter/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +17,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(title),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                FontAwesomeIcons.magnifyingGlass,
+                size: 20,
+              ))
+        ],
+      ),
+      body: IndexedStack(
+        index: navIndex,
+        children: [
+          const Home(),
+          Container(
+            color: Colors.indigo,
+          ),
+          Container(
+            color: Colors.green,
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navIndex,
