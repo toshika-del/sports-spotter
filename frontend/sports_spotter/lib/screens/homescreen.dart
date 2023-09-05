@@ -19,6 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(title),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile/');
+            },
+            icon: const Icon(FontAwesomeIcons.user)),
         actions: [
           IconButton(
               onPressed: () {},

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 const title = 'Sports Spotter';
+const version = 'v1.0.0';
 
 // Paddings and Spacers
 
