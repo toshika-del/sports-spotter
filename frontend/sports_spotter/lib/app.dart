@@ -12,6 +12,18 @@ class App extends StatelessWidget {
       title: title,
       home: const HomeScreen(),
       theme: ThemeData(
+          colorScheme: ColorScheme(
+              brightness: Brightness.light,
+              primary: Colors.blue.shade800,
+              onPrimary: Colors.white,
+              secondary: Colors.grey.shade300,
+              onSecondary: Colors.black,
+              error: Colors.red.shade300,
+              onError: Colors.black,
+              background: Colors.white,
+              onBackground: Colors.black,
+              surface: Colors.white,
+              onSurface: Colors.black),
           useMaterial3: false,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
