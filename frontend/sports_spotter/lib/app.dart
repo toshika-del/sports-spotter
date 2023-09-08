@@ -30,6 +30,12 @@ class App extends StatelessWidget {
                   minimumSize: const Size.fromHeight(56),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)))),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                  side: BorderSide(color: Colors.blue.shade800, width: 1),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)))),
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -37,6 +43,9 @@ class App extends StatelessWidget {
           listTileTheme: ListTileThemeData(
             iconColor: Colors.grey.shade800,
           ),
+          dialogTheme: DialogTheme(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16))),
           inputDecorationTheme: InputDecorationTheme(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(16))),

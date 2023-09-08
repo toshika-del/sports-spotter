@@ -67,7 +67,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.red.shade400),
             ),
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text('Logout?'),
+                        content: const Text(
+                            'Are you sure want to logout of Sports Spotter? You will no longer recive updates about sports events.'),
+                        actions: [
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.red.shade400),
+                              onPressed: () {},
+                              child: const Text('Logout')),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel'))
+                        ],
+                      ));
+            },
           ),
         ],
       ),
