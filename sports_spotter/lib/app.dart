@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme(
               brightness: Brightness.light,
-              primary: Colors.blue.shade800,
+              primary: Colors.blue.shade700,
               onPrimary: Colors.white,
               secondary: Colors.grey.shade300,
               onSecondary: Colors.black,
@@ -50,9 +50,11 @@ class App extends StatelessWidget {
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
           cardTheme: CardTheme(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              elevation: 4)),
+            elevation: 0,
+            color: Colors.grey.shade300,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          )),
       routes: {'/profile/': (context) => const ProfileScreen()},
     );
   }
