@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme(
               brightness: Brightness.light,
-              primary: Colors.blue.shade800,
+              primary: Colors.blue.shade700,
               onPrimary: Colors.white,
               secondary: Colors.grey.shade300,
               onSecondary: Colors.black,
