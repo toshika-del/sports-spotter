@@ -18,7 +18,10 @@ class AlertItem extends StatelessWidget {
               title,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(description)
+            Text(
+              description,
+              style: const TextStyle(fontSize: 16),
+            )
           ],
         ),
       ),

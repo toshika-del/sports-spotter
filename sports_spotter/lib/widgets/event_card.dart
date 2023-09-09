@@ -31,9 +31,12 @@ class EventCard extends StatelessWidget {
             space8,
             Text(
               title,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(description)
+            Text(
+              description,
+              style: const TextStyle(fontSize: 16),
+            )
           ],
         ),
       ),
