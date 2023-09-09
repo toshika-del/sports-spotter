@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:sports_spotter/api/posts.dart';
+import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/widgets/event_card.dart';
 
 class Home extends StatefulWidget {
@@ -54,6 +55,7 @@ class _HomeState extends State<Home> {
                 }
                 final data = snapshot.data!;
                 return ListView.builder(
+                    padding: paddingAll8,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return EventCard(

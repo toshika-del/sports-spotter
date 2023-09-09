@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:sports_spotter/api/alerts.dart';
+import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/widgets/alert_item.dart';
 
 class Alerts extends StatefulWidget {
@@ -54,6 +55,7 @@ class _AlertsState extends State<Alerts> {
                 }
                 final data = snapshot.data!;
                 return ListView.builder(
+                    padding: paddingAll8,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return AlertItem(
