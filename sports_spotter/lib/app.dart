@@ -50,9 +50,11 @@ class App extends StatelessWidget {
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
           cardTheme: CardTheme(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              elevation: 4)),
+            elevation: 0,
+            color: Colors.grey.shade300,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          )),
       routes: {'/profile/': (context) => const ProfileScreen()},
     );
   }
