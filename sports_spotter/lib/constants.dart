@@ -18,3 +18,6 @@ const space16 = SizedBox(
   height: 16,
   width: 16,
 );
+// Base API Url
+
+const baseUrl = 'http://127.0.0.1:8000/posts/';
