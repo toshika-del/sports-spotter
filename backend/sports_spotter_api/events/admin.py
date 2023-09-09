@@ -1,3 +1,5 @@
 from django.contrib import admin
+from events.models import Post, Alert
 
-# Register your models here.
+admin.site.register(Post)
+admin.site.register(Alert)
