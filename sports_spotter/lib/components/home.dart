@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:sports_spotter/api/posts.dart';
 import 'package:sports_spotter/widgets/event_card.dart';
@@ -14,6 +15,14 @@ class _HomeState extends State<Home> {
   var response = fetchPosts();
   @override
   Widget build(BuildContext context) {
+    final refreshButton = IconButton(
+        onPressed: () {
+          setState(() {
+            response = fetchPosts();
+          });
+        },
+        icon: const Icon(FontAwesomeIcons.arrowRotateRight));
+
     return LiquidPullToRefresh(
       color: Colors.blue.shade700,
       showChildOpacityTransition: false,
@@ -29,12 +38,18 @@ class _HomeState extends State<Home> {
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data!.isEmpty) {
-                  return Text(
-                    'There is nothing to show',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blue.shade600,
-                        fontWeight: FontWeight.bold),
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'There is nothing to show',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.blue.shade600,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      refreshButton
+                    ],
                   );
                 }
                 final data = snapshot.data!;
@@ -47,12 +62,18 @@ class _HomeState extends State<Home> {
                           description: data[index]['description']);
                     });
               }
-              return Text(
-                'Some error occured',
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.red.shade400,
-                    fontWeight: FontWeight.bold),
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Some error occured',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.red.shade400,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  refreshButton
+                ],
               );
             })),
       ),
