@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from feedback import views as feedback_views
+from events import views as events_views
+from rest_framework.authtoken.views import obtain_auth_token
 
-urlpatterns = [
+router = routers.DefaultRouter()
+router.register(r'posts', events_views.PostViewSet, basename='posts')
+router.register(r'alerts', events_views.AlertViewSet, basename='alerts')
+urlpatterns = router.urls
+
+urlpatterns += [
     path('admin/', admin.site.urls),
+    path('api-auth-token/', obtain_auth_token),
+    path('feedback/', feedback_views.FeedbackApiView.as_view())
 ]
