@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from feedback import views as feedback_views
 
-urlpatterns = [
+router = routers.DefaultRouter()
+
+urlpatterns = router.urls
+
+urlpatterns += [
     path('admin/', admin.site.urls),
+    path('feedback', feedback_views.FeedbackApiView.as_view())
 ]
