@@ -1,0 +1,17 @@
+POST http://127.0.0.1:8000/register/ 
+Content-Type: application/vnd.api+json
+
+{ "username": "adam", "password": "Pass1234!", "email": "adam@mail.com" }
+
+###
+
+POST http://127.0.0.1:8000/login/
+Content-Type: application/json
+
+{ "username": "adam", "password": "Pass1234!" }
+
+###
+
+GET http://127.0.0.1:8000/test_token 
+Content-Type: application/json 
+Authorization: Token e34f7c423d31a6714aa60f86878ed959a8b29970
