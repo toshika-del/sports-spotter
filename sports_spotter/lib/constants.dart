@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 const title = 'Sports Spotter';
 const version = 'v1.0.0';
 
+// Colors
+
+final primaryColor = Colors.blue.shade600;
+final secondaryColor = Colors.grey.shade300;
+
 // Paddings and Spacers
 
 const paddingAll8 = EdgeInsets.all(8);
