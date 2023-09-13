@@ -24,7 +24,7 @@ class App extends StatelessWidget {
               onBackground: Colors.black,
               surface: Colors.white,
               onSurface: Colors.black),
-          useMaterial3: false,
+          useMaterial3: true,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(56),
