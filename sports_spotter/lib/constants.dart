@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 const title = 'Sports Spotter';
 const version = 'v1.0.0';
 
+// Colors
+
+final primaryColor = Colors.blue.shade600;
+final secondaryColor = Colors.grey.shade300;
+
 // Paddings and Spacers
 
 const paddingAll8 = EdgeInsets.all(8);
@@ -21,3 +26,4 @@ const space16 = SizedBox(
 // Base API Url
 
 const baseUrl = 'http://127.0.0.1:8000';
+const token = '0b41b2695d3e264577aa1e258638e94a37e23a2d';

@@ -3,9 +3,7 @@ import 'package:sports_spotter/constants.dart';
 import 'dart:convert';
 
 Future<List?> fetchAlerts() async {
-  const headers = {
-    'Authorization': 'Token 04307c770ead0e4eefe3ecb52b70eea49a0ba1fd'
-  };
+  const headers = {'Authorization': 'Token $token'};
   final response =
       await http.get(Uri.parse('$baseUrl/alerts/'), headers: headers);
   if (response.statusCode == 200) {

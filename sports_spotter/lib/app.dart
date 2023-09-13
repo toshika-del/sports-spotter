@@ -14,9 +14,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme(
               brightness: Brightness.light,
-              primary: Colors.blue.shade700,
+              primary: primaryColor,
               onPrimary: Colors.white,
-              secondary: Colors.grey.shade300,
+              secondary: secondaryColor,
               onSecondary: Colors.black,
               error: Colors.red.shade300,
               onError: Colors.black,
@@ -24,7 +24,7 @@ class App extends StatelessWidget {
               onBackground: Colors.black,
               surface: Colors.white,
               onSurface: Colors.black),
-          useMaterial3: false,
+          useMaterial3: true,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(56),

@@ -20,6 +20,7 @@ from rest_framework import routers
 from feedback import views as feedback_views
 from events import views as events_views
 from rest_framework.authtoken.views import obtain_auth_token
+from core import views as core_views
 
 router = routers.DefaultRouter()
 router.register(r'posts', events_views.PostViewSet, basename='posts')
@@ -29,5 +30,8 @@ urlpatterns = router.urls
 urlpatterns += [
     path('admin/', admin.site.urls),
     path('api-auth-token/', obtain_auth_token),
-    path('feedback/', feedback_views.FeedbackApiView.as_view())
+    path('feedback/', feedback_views.FeedbackApiView.as_view()),
+    path('register/', core_views.register),
+    path('login/', core_views.login),
+    path('get_user/', core_views.get_user),
 ]
