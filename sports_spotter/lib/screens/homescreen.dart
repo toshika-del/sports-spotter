@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.pushNamed(context, '/profile/');
             },
-            icon: const Icon(FontAwesomeIcons.user)),
+            icon: const Icon(FontAwesomeIcons.solidUser)),
         actions: [
           IconButton(
               onPressed: () {},
@@ -44,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.house), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.calendar), label: 'Calandar'),
+              icon: Icon(FontAwesomeIcons.solidCalendar), label: 'Calandar'),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.bell), label: 'Notifications'),
+              icon: Icon(FontAwesomeIcons.solidBell), label: 'Notifications'),
         ],
         onTap: (value) {
           setState(() {

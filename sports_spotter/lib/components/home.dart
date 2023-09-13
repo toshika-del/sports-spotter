@@ -39,9 +39,12 @@ class _HomeState extends State<Home> {
                     },
                   );
                 }
-                return ListView.builder(
+                return ListView.separated(
                     padding: paddingAll8,
                     itemCount: data.length,
+                    separatorBuilder: (context, index) => const SizedBox(
+                          height: 4,
+                        ),
                     itemBuilder: (context, index) {
                       return EventCard(
                           image: NetworkImage(data[index]['image_url']),
