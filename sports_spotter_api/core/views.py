@@ -23,7 +23,7 @@ def login(request):
 
 @api_view(['POST'])
 def logout(request):
-    return Response({})
+    return JsonResponse({"message":"logged out successfully"})
 
 @api_view(['POST'])
 def register(request):
