@@ -25,6 +25,15 @@ class App extends StatelessWidget {
               surface: Colors.white,
               onSurface: Colors.black),
           useMaterial3: true,
+          dividerTheme:
+              DividerThemeData(color: Colors.grey.shade400, thickness: 0.5),
+          appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.black,
+              centerTitle: true,
+              titleTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20)),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(56),

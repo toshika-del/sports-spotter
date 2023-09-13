@@ -25,5 +25,6 @@ const space16 = SizedBox(
 );
 // Base API Url
 
-const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = 'http://10.0.2.2:8000';
+const baseUrlIOS = 'http://127.0.0.1:8000';
 const token = '0b41b2695d3e264577aa1e258638e94a37e23a2d';

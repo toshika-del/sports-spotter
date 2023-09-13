@@ -24,7 +24,7 @@ class EventCard extends StatelessWidget {
               image: image,
               height: 200,
               width: double.maxFinite,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.fill,
             ),
           ),
           Padding(
