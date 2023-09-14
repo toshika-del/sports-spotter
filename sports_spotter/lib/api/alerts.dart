@@ -1,10 +1,11 @@
 import 'dart:io' show Platform;
 import 'package:http/http.dart' as http;
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 import 'dart:convert';
 
 Future<List?> fetchAlerts() async {
-  const headers = {'Authorization': 'Token $token'};
+  final headers = {'Authorization': 'Token ${Auth.token}'};
   final response = await http.get(
       Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/alerts/'),
       headers: headers);
