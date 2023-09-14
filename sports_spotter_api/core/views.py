@@ -19,11 +19,11 @@ def login(request):
     print(user.has_usable_password())
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(user)
-    return JsonResponse({"token":token.key, "user":serializer.data})
+    return JsonResponse({"token":token.key, "user":serializer.data},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def logout(request):
-    return JsonResponse({"message":"logged out successfully"})
+    return JsonResponse({"message":"logged out successfully"},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def register(request):
@@ -35,7 +35,7 @@ def register(request):
         user.set_password(data['password'])
         user.save()
         token = Token.objects.get(user=user)
-        return JsonResponse({"token":token.key, "user":serializer.data})
+        return JsonResponse({"token":token.key, "user":serializer.data},status=status.HTTP_200_OK)
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])

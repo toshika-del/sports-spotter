@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             space16,
             TextField(
+              controller: password,
               obscureText: hidePassword,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
@@ -62,7 +64,33 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             space16,
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (enrollment.text.trim().isNotEmpty ||
+                      password.text.trim().isNotEmpty) {
+                    Auth.login(enrollment.text.trim(), password.text.trim())
+                        .then((value) {
+                      final statusCode = value['status_code'];
+                      if (statusCode == 403) {
+                        showSnackbar(context, const Text('Invalid password'),
+                            errorColor);
+                      } else if (statusCode == 404) {
+                        showSnackbar(
+                            context, const Text('User not found'), errorColor);
+                      } else if (statusCode == 200) {
+                        showSnackbar(
+                            context,
+                            Text('Logged in as ${enrollment.text}'),
+                            successColor);
+                      }
+                    });
+                  } else {
+                    showSnackbar(
+                        context,
+                        const Text(
+                            'Enter a valid enrollment number and password'),
+                        errorColor);
+                  }
+                },
                 child: const Text(
                   'Login',
                   style: TextStyle(fontWeight: FontWeight.bold),

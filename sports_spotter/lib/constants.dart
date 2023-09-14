@@ -8,6 +8,8 @@ const version = 'v1.0.0';
 
 final primaryColor = Colors.blue.shade600;
 final secondaryColor = Colors.grey.shade300;
+final errorColor = Colors.red.shade300;
+final successColor = Colors.green.shade400;
 
 // Paddings and Spacers
 
@@ -27,4 +29,13 @@ const space16 = SizedBox(
 
 const baseUrl = 'http://10.0.2.2:8000';
 const baseUrlIOS = 'http://127.0.0.1:8000';
-const token = '0b41b2695d3e264577aa1e258638e94a37e23a2d';
+
+// functions
+showSnackbar(BuildContext context, Widget content,
+    [Color? background, SnackBarAction? action]) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: content,
+    action: action,
+    backgroundColor: background,
+  ));
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
-import 'package:sports_spotter/screens/homescreen.dart';
+import 'package:sports_spotter/controllers/login_home_controller.dart';
 import 'package:sports_spotter/screens/profilescreen.dart';
 
 class App extends StatelessWidget {
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
-      home: const HomeScreen(),
+      initialRoute: '/home/',
       theme: ThemeData(
           colorScheme: ColorScheme(
               brightness: Brightness.light,
@@ -36,6 +36,8 @@ class App extends StatelessWidget {
                   fontSize: 20)),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size.fromHeight(56),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)))),
@@ -64,7 +66,10 @@ class App extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           )),
-      routes: {'/profile/': (context) => const ProfileScreen()},
+      routes: {
+        '/profile/': (context) => const ProfileScreen(),
+        '/home/': (context) => const LoginHomeController()
+      },
     );
   }
 }
