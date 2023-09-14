@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/controllers/login_home_controller.dart';
-import 'package:sports_spotter/screens/homescreen.dart';
 import 'package:sports_spotter/screens/profilescreen.dart';
 
 class App extends StatelessWidget {
@@ -11,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
-      home: const LoginHomeController(),
+      initialRoute: '/home/',
       theme: ThemeData(
           colorScheme: ColorScheme(
               brightness: Brightness.light,
@@ -69,7 +68,7 @@ class App extends StatelessWidget {
           )),
       routes: {
         '/profile/': (context) => const ProfileScreen(),
-        '/home/': (context) => const HomeScreen()
+        '/home/': (context) => const LoginHomeController()
       },
     );
   }

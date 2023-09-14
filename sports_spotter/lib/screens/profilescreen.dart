@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -79,7 +80,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           TextButton(
                               style: TextButton.styleFrom(
                                   foregroundColor: Colors.red.shade400),
-                              onPressed: () {},
+                              onPressed: () {
+                                Auth.logout().then((value) {
+                                  Navigator.pop(context);
+                                  Navigator.popUntil(
+                                      context, ModalRoute.withName('/home/'));
+                                  showSnackbar(
+                                      context, const Text('Logged out'));
+                                });
+                              },
                               child: const Text('Logout')),
                           TextButton(
                               onPressed: () {

@@ -27,4 +27,9 @@ class Auth {
     }
     return {"status_code": response.statusCode};
   }
+
+  static Future<dynamic> logout() async {
+    _token = null;
+    return {"status_code": 200, "message": "logged out"};
+  }
 }
