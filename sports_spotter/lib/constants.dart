@@ -1,5 +1,6 @@
 // Strings
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 const title = 'Sports Spotter';
 const version = 'v1.0.0';
@@ -29,6 +30,11 @@ const space16 = SizedBox(
 
 const baseUrl = 'http://10.0.2.2:8000';
 const baseUrlIOS = 'http://127.0.0.1:8000';
+
+// loaders
+
+final Widget loader = LoadingAnimationWidget.flickr(
+    leftDotColor: primaryColor, rightDotColor: secondaryColor, size: 64);
 
 // functions
 showSnackbar(BuildContext context, Widget content,

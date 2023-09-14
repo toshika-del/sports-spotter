@@ -32,4 +32,15 @@ class Auth {
     _token = null;
     return {"status_code": 200, "message": "logged out"};
   }
+
+  static Future<dynamic> getUser() async {
+    final body = {"token": _token};
+    final response = await http.post(
+        Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/get_user/'),
+        body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['data']['attributes'];
+    }
+    return null;
+  }
 }
