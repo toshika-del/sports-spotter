@@ -33,6 +33,7 @@ def register(request):
         serializer.save()
         user = User.objects.get(username=data['username'])
         user.set_password(data['password'])
+        user.email = data['email']
         user.save()
         token = Token.objects.get(user=user)
         return JsonResponse({"token":token.key, "user":serializer.data},status=status.HTTP_200_OK)
