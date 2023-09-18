@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
+import 'package:sports_spotter/widgets/profile_details.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,6 +26,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             height: 200,
           ),
+          FutureBuilder(
+              future: Auth.getUser(),
+              builder: (context, snapshot) {
+                final data = snapshot.data;
+                if (data != null) {
+                  return ProfileDetails(
+                      firstName: data['first_name'],
+                      lastName: data['last_name'],
+                      username: data['username'],
+                      email: data['email']);
+                }
+                return loader;
+              }),
+          const Divider(),
           ListTile(
             title: const Text('Performane Tracking'),
             subtitle:
