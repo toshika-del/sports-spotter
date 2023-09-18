@@ -28,6 +28,8 @@ def logout(request):
 @api_view(['POST'])
 def register(request):
     data = JSONParser().parse(request)
+    if not data['username'].startswith("0801"):
+        return JsonResponse({"detail":"unauthorised"},status=status.HTTP_401_UNAUTHORIZED)
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
