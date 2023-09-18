@@ -1,19 +1,15 @@
-from json import JSONDecodeError
-from django.http import JsonResponse
-from .serializers import PostSerializer, AlertSerializer
-from .models import Post, Alert
-from rest_framework.parsers import JSONParser
+from .serializers import EventSerializer, AlertSerializer
+from .models import Event, Alert
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets, status
-from rest_framework.response import Response
-from rest_framework.mixins import ListModelMixin, UpdateModelMixin, RetrieveModelMixin
+from rest_framework import viewsets
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 
 
-class PostViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
+class EventViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     
     permission_classes = (IsAuthenticated,)
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
 
 
 class AlertViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):

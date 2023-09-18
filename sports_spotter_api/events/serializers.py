@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Post, Alert
+from .models import Event, Alert
 
-class PostSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Post
+        model = Event
         fields = ('title', 'description', 'image_url', 'form_url')
 
 
