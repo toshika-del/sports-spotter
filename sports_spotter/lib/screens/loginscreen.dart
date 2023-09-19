@@ -95,9 +95,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Login',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
+            space8,
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register/');
+                },
+                child: const Text('Don\'t have an account? Create one')),
             TextButton(onPressed: () {}, child: const Text('Forgot Password?'))
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.feedback),
       ),
     );
   }
