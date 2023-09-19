@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -77,7 +78,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             space16,
             ElevatedButton(
-                onPressed: () {}, child: const Text('Create Account')),
+                onPressed: () {
+                  if (_fName.text.trim().isEmpty ||
+                      _lName.text.trim().isEmpty ||
+                      _enrollment.text.trim().isEmpty ||
+                      _email.text.trim().isEmpty ||
+                      _password.text.trim().isEmpty) {
+                    showSnackbar(context, const Text('Field cannot be empty'),
+                        errorColor);
+                  } else {
+                    showDialog(context: context, builder: (context) => loader);
+                    Auth.register(
+                            _enrollment.text.trim(),
+                            _email.text.trim(),
+                            _password.text.trim(),
+                            _fName.text.trim(),
+                            _lName.text.trim())
+                        .then((value) {
+                      Navigator.pop(context);
+                      if (value['status_code'] == 200) {
+                        Navigator.pop(context);
+                        showSnackbar(context, const Text('Account created'),
+                            successColor);
+                      } else if (value['status_code'] == 400) {
+                        showSnackbar(
+                            context,
+                            const Text(
+                                'Account with this enrollment already exist'),
+                            errorColor);
+                      } else if (value['status_code'] == 401) {
+                        showSnackbar(context,
+                            const Text('You are unauthorized'), errorColor);
+                      } else {
+                        showSnackbar(
+                            context,
+                            const Text('Unable to connect to server'),
+                            errorColor);
+                      }
+                    });
+                  }
+                },
+                child: const Text('Create Account')),
             TextButton(
                 onPressed: () {
                   Navigator.pop(context);

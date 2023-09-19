@@ -29,6 +29,8 @@ def logout(request):
 def register(request):
     data = JSONParser().parse(request)
     serializer = UserSerializer(data=data)
+    if not data['username'].startswith('0801'):
+        return JsonResponse({"error":"you are unauthorised"}, status=status.HTTP_401_UNAUTHORIZED)
     if serializer.is_valid():
         serializer.save()
         user = User.objects.get(username=data['username'])
