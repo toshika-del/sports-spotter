@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sports_spotter/api/feedback.dart';
 import 'package:sports_spotter/constants.dart';
 
 class FeedbackScreen extends StatelessWidget {
@@ -49,7 +50,22 @@ class FeedbackScreen extends StatelessWidget {
             ),
             space16,
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (email.text.trim().isNotEmpty ||
+                      title.text.trim().isNotEmpty ||
+                      description.text.trim().isNotEmpty) {
+                    FeedbackApi.postFeedback(title.text.trim(),
+                            description.text.trim(), email.text.trim())
+                        .then((value) {
+                      if (value == 200) {
+                        Navigator.pop(context);
+                        showSnackbar(context, const Text('Feedback sent'));
+                      }
+                    });
+                  } else {
+                    showSnackbar(context, const Text('Fields cannot be empty'));
+                  }
+                },
                 child: const Text(
                   'Send Feedback',
                   style: TextStyle(fontWeight: FontWeight.bold),
