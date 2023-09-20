@@ -15,7 +15,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
-ADD /app .
+ADD . /app
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
@@ -47,4 +47,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD gunicorn 'sports_spotter_api.sports_spotter_api.wsgi' --bind=0.0.0.0:8000
+CMD python manage.py runserver
