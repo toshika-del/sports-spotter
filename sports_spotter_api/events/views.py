@@ -46,3 +46,10 @@ class TeamView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
         team = get_object_or_404(Team, id=id)
         team.remove_member(data['username'])
         return JsonResponse({"detail":f"{data['username']} removed from team {team.name}"},status=status.HTTP_200_OK)
+    
+    @staticmethod
+    @api_view(['POST'])
+    def create(request):
+        data = TeamView.json.parse(request)
+        Team.create_team(data['name'],data['captain_username'],data['event_id'])
+        return JsonResponse(data)

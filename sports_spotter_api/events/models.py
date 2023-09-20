@@ -59,6 +59,13 @@ class Team(Model):
         user = get_object_or_404(User, username=username)
         self.members.remove(user)
 
+    @staticmethod
+    def create_team(name, captain_username, event_id):
+        captain = get_object_or_404(User, username=captain_username)
+        event = get_object_or_404(Event, id=event_id)
+        team = Team.objects.create(name=name,captain=captain,event=event)
+        team.save()
+
 class Result(Model):
 
     class Meta:

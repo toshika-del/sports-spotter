@@ -37,4 +37,5 @@ urlpatterns += [
     path('get_user/', core_views.get_user),
     path('teams/<str:id>/add-member/', events_views.TeamView.add_to_team),
     path('teams/<str:id>/remove-member/', events_views.TeamView.remove_from_team),
+    path('create-team/', events_views.TeamView.create),
 ]
