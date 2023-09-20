@@ -106,7 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/feedback/');
+        },
         child: const Icon(Icons.feedback),
       ),
     );

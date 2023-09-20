@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/controllers/login_home_controller.dart';
+import 'package:sports_spotter/screens/feedbackscreen.dart';
 import 'package:sports_spotter/screens/profilescreen.dart';
 import 'package:sports_spotter/screens/registerscreen.dart';
 
@@ -71,6 +72,7 @@ class App extends StatelessWidget {
         '/profile/': (context) => const ProfileScreen(),
         '/home/': (context) => const LoginHomeController(),
         '/register/': (context) => const RegisterScreen(),
+        '/feedback/': (context) => const FeedbackScreen(),
       },
     );
   }

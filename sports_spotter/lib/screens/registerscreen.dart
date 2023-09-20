@@ -128,7 +128,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/feedback/');
+        },
         child: const Icon(Icons.feedback),
       ),
     );
