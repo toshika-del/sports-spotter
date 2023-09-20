@@ -43,4 +43,23 @@ class Auth {
     }
     return null;
   }
+
+  static Future<dynamic> register(String username, String email,
+      String password, String firstName, String lastName) async {
+    final body = {
+      "username": username,
+      "password": password,
+      "email": email,
+      "first_name": firstName,
+      "last_name": lastName
+    };
+    final response = await http.post(
+        Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/register/'),
+        body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      _token = jsonDecode(response.body)['token'];
+      return jsonDecode('{"status_code":200, "body": ${response.body}}');
+    }
+    return {"status_code": response.statusCode};
+  }
 }
