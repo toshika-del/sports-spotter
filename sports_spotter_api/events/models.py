@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.models import (TimeStampedModel, ActivatorModel, TitleDescriptionModel)
 from utils.model_abstract import Model
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 
 class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
@@ -40,11 +41,30 @@ class Team(Model):
 
     name = models.CharField(default='Team', null=False, max_length=1000)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    members = models.ManyToManyField(User)
+    size = models.IntegerField(default=1,null=False)
+    captain = models.ForeignKey(User,null=True,on_delete=models.CASCADE,related_name='captain')
+    members = models.ManyToManyField(User,related_name='members')
 
     def __str__(self) -> str:
         return f"{self.event.title} {self.name}"
     
+    def add_member(self, username):
+        if(self.members.count()<self.size):
+            user = get_object_or_404(User, username=username)
+            self.members.add(user)
+        else:
+            raise OverflowError('max team members added')
+
+    def remove_member(self, username):
+        user = get_object_or_404(User, username=username)
+        self.members.remove(user)
+
+    @staticmethod
+    def create_team(name, captain_username, event_id):
+        captain = get_object_or_404(User, username=captain_username)
+        event = get_object_or_404(Event, id=event_id)
+        team = Team.objects.create(name=name,captain=captain,event=event)
+        team.save()
 
 class Result(Model):
 
