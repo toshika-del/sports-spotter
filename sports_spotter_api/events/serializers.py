@@ -18,4 +18,4 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'members')
+        fields = ('id', 'name', 'event', 'captain', 'members', 'size',)

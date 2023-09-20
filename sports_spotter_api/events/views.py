@@ -33,7 +33,10 @@ class TeamView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     def add_to_team(request, id):
         data = TeamView.json.parse(request)
         team = get_object_or_404(Team, id=id)
-        team.add_member(data['username'])
+        try:
+            team.add_member(data['username'])
+        except OverflowError:
+            return JsonResponse({"error":f"max team members added"},status=status.HTTP_400_BAD_REQUEST)
         return JsonResponse({"detail":f"{data['username']} added to team {team.name}"},status=status.HTTP_200_OK)
     
     @staticmethod

@@ -41,14 +41,19 @@ class Team(Model):
 
     name = models.CharField(default='Team', null=False, max_length=1000)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    members = models.ManyToManyField(User)
+    size = models.IntegerField(default=1,null=False)
+    captain = models.ForeignKey(User,null=True,on_delete=models.CASCADE,related_name='captain')
+    members = models.ManyToManyField(User,related_name='members')
 
     def __str__(self) -> str:
         return f"{self.event.title} {self.name}"
     
     def add_member(self, username):
-        user = get_object_or_404(User, username=username)
-        self.members.add(user)
+        if(self.members.count()<self.size):
+            user = get_object_or_404(User, username=username)
+            self.members.add(user)
+        else:
+            raise OverflowError('max team members added')
 
     def remove_member(self, username):
         user = get_object_or_404(User, username=username)
