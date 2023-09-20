@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.models import (TimeStampedModel, ActivatorModel, TitleDescriptionModel)
 from utils.model_abstract import Model
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 
 class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
@@ -45,6 +46,13 @@ class Team(Model):
     def __str__(self) -> str:
         return f"{self.event.title} {self.name}"
     
+    def add_member(self, username):
+        user = get_object_or_404(User, username=username)
+        self.members.add(user)
+
+    def remove_member(self, username):
+        user = get_object_or_404(User, username=username)
+        self.members.remove(user)
 
 class Result(Model):
 

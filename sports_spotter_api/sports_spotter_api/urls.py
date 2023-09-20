@@ -25,6 +25,7 @@ from core import views as core_views
 router = routers.DefaultRouter()
 router.register(r'events', events_views.EventViewSet, basename='events')
 router.register(r'alerts', events_views.AlertViewSet, basename='alerts')
+router.register(r'teams', events_views.TeamView, basename='teams')
 urlpatterns = router.urls
 
 urlpatterns += [
@@ -34,4 +35,6 @@ urlpatterns += [
     path('register/', core_views.register),
     path('login/', core_views.login),
     path('get_user/', core_views.get_user),
+    path('teams/<str:id>/add-member/', events_views.TeamView.add_to_team),
+    path('teams/<str:id>/remove-member/', events_views.TeamView.remove_from_team),
 ]
