@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
+import 'package:sports_spotter/models/alert_model.dart';
 
 class AlertItem extends StatelessWidget {
-  final String title;
-  final String description;
-  const AlertItem({super.key, required this.title, required this.description});
+  final AlertModel model;
+  const AlertItem({
+    super.key,
+    required this.model,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +18,17 @@ class AlertItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              model.timeAgo,
+              style: const TextStyle(fontSize: 12),
+            ),
+            Text(
+              model.title,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              description,
+              model.description,
               style: const TextStyle(fontSize: 16),
-            )
+            ),
           ],
         ),
       ),

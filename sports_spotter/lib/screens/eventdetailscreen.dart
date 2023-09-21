@@ -8,14 +8,7 @@ class EventDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(model.toString());
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text(
-        //     model.title,
-        //     style: const TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        // ),
         body: NestedScrollView(
             headerSliverBuilder: (context, scrolled) {
               return [

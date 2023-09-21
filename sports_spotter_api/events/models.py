@@ -13,7 +13,6 @@ class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
         ordering = ["id"]
 
     image_url = models.URLField(max_length=10000, default='')
-    form_url = models.URLField(max_length=10000, default='')
 
     def __str__(self) -> str:
         return self.title
@@ -25,8 +24,6 @@ class Alert(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
         verbose_name = "Alert"
         verbose_name_plural = "Alerts"
         ordering = ["id"]
-
-    form_url = models.URLField(default='', max_length=10000)
 
     def __str__(self) -> str:
         return self.title
