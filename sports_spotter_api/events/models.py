@@ -13,7 +13,6 @@ class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
         ordering = ["id"]
 
     image_url = models.URLField(max_length=10000, default='')
-    form_url = models.URLField(max_length=10000, default='')
 
     def __str__(self) -> str:
         return self.title
@@ -25,8 +24,6 @@ class Alert(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
         verbose_name = "Alert"
         verbose_name_plural = "Alerts"
         ordering = ["id"]
-
-    form_url = models.URLField(default='', max_length=10000)
 
     def __str__(self) -> str:
         return self.title
@@ -60,11 +57,12 @@ class Team(Model):
         self.members.remove(user)
 
     @staticmethod
-    def create_team(name, captain_username, event_id):
+    def create_team(name, captain_username, event_id, size):
         captain = get_object_or_404(User, username=captain_username)
         event = get_object_or_404(Event, id=event_id)
-        team = Team.objects.create(name=name,captain=captain,event=event)
+        team = Team.objects.create(name=name,captain=captain,event=event,size=size)
         team.save()
+        return team.id
 
 class Result(Model):
 

@@ -44,8 +44,8 @@ class _AlertsState extends State<Alerts> {
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return AlertItem(
-                          title: data[index]['title'],
-                          description: data[index]['description']);
+                        model: data[index],
+                      );
                     });
               }
               return ErrorMessage(

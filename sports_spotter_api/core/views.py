@@ -52,3 +52,9 @@ def get_user(request):
         return Response(user.data)
     except:
         return JsonResponse({"error":"invalid token"})
+    
+@api_view(['GET'])
+def get_user_by_id(request, id):
+    user = get_object_or_404(User, id=id)
+    return Response(UserSerializer(user).data)
+

@@ -4,14 +4,23 @@ import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 import 'dart:convert';
 
-Future<List?> fetchAlerts() async {
+import 'package:sports_spotter/models/alert_model.dart';
+
+Future<List<AlertModel>?> fetchAlerts() async {
   final headers = {'Authorization': 'Token ${Auth.token}'};
   final response = await http.get(
       Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/alerts/'),
       headers: headers);
   if (response.statusCode == 200) {
     final List<dynamic> data = json.decode(response.body)['data'];
-    final content = data.map((item) => item['attributes']).toList();
+    final content = data
+        .map((item) => AlertModel(
+              id: item['id'],
+              title: item['attributes']['title'],
+              description: item['attributes']['description'],
+              sentOn: DateTime.parse(item['attributes']['activate_date']),
+            ))
+        .toList();
     return content;
   }
   return null;
