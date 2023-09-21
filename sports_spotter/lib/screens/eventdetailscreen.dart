@@ -8,6 +8,7 @@ class EventDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(model.toString());
     return Scaffold(
         // appBar: AppBar(
         //   title: Text(
@@ -47,6 +48,14 @@ class EventDetailScreen extends StatelessWidget {
                     model.description,
                     style: const TextStyle(fontSize: 16),
                   ),
+                  space8,
+                  Text(
+                    'Posted on: ${model.postedOn.toLocal().toString().substring(0, 16)}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                      'Last date: ${model.lastDate.toLocal().toString().substring(0, 16)}',
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   space16,
                   Row(
                     children: [

@@ -47,7 +47,14 @@ class EventCard extends StatelessWidget {
                   ),
                   Text(
                     model.description,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    'Last Date ${model.lastDate.toLocal().toString().substring(0, 10)}',
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
