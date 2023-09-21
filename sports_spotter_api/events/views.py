@@ -51,5 +51,5 @@ class TeamView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     @api_view(['POST'])
     def create(request):
         data = TeamView.json.parse(request)
-        Team.create_team(data['name'],data['captain_username'],data['event_id'])
-        return JsonResponse(data)
+        id = Team.create_team(data['name'],data['captain_username'],data['event_id'],data['size'])
+        return JsonResponse({"id":id})
