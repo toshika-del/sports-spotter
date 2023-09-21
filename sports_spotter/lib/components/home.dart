@@ -46,10 +46,7 @@ class _HomeState extends State<Home> {
                           height: 4,
                         ),
                     itemBuilder: (context, index) {
-                      return EventCard(
-                          image: NetworkImage(data[index]['image_url']),
-                          title: data[index]['title'],
-                          description: data[index]['description']);
+                      return EventCard(model: data[index]);
                     });
               }
               if (snapshot.connectionState == ConnectionState.waiting) {

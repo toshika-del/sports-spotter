@@ -5,7 +5,7 @@ class EventSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Event
-        fields = ('title', 'description', 'image_url', 'form_url')
+        fields = ('title', 'description', 'image_url', 'form_url', 'activate_date', 'deactivate_date')
 
 
 class AlertSerializer(serializers.ModelSerializer):

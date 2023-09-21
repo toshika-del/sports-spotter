@@ -53,6 +53,11 @@ class App extends StatelessWidget {
               style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)))),
+          filledButtonTheme: FilledButtonThemeData(
+              style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)))),
           listTileTheme: ListTileThemeData(
             iconColor: Colors.grey.shade800,
           ),
