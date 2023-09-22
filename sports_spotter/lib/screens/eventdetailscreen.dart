@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/event.dart';
+import 'package:sports_spotter/widgets/create_team.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final EventModel model;
   const EventDetailScreen({super.key, required this.model});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +54,14 @@ class EventDetailScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: FilledButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    useSafeArea: true,
+                                    showDragHandle: true,
+                                    context: context,
+                                    builder: (context) =>
+                                        CreateTeamWidget(model: model));
+                              },
                               child: const Text('Create team'))),
                       space16,
                       Expanded(
