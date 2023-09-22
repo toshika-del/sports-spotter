@@ -10,7 +10,7 @@ class TeamModel {
   final String name;
   final UserModel captain;
   final int size;
-  final List<dynamic> members;
+  final List<UserModel?> members;
   final String id;
 
   TeamModel(
@@ -73,8 +73,11 @@ class TeamModel {
       final data = json.decode(response.body)['data'];
       final captain = await UserModel.getUserById(
           data['relationships']['captain']['data']['id']);
-      List<dynamic> members = data['relationships']['members']['data'];
-      members = members.map((e) => e['id']).toList();
+      List<UserModel?> members = List.empty(growable: true);
+      for (var member
+          in (data['relationships']['members']['data'] as List<dynamic>)) {
+        members.add(await UserModel.getUserById(member['id']));
+      }
       return TeamModel(
           id: data['id'],
           eventId: data['relationships']['event']['data']['id'],
@@ -128,5 +131,10 @@ class TeamModel {
           .toList();
     }
     return null;
+  }
+
+  @override
+  String toString() {
+    return name;
   }
 }
