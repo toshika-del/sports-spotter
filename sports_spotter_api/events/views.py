@@ -1,5 +1,5 @@
-from .serializers import EventSerializer, AlertSerializer, TeamSerializer
-from .models import Event, Alert, Team
+from .serializers import EventSerializer, AlertSerializer, TeamSerializer, ResultSerializer
+from .models import Event, Alert, Team, Result
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
@@ -51,5 +51,11 @@ class TeamView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     @api_view(['POST'])
     def create(request):
         data = TeamView.json.parse(request)
-        Team.create_team(data['name'],data['captain_username'],data['event_id'])
-        return JsonResponse(data)
+        id = Team.create_team(data['name'],data['captain_username'],data['event_id'],data['size'])
+        return JsonResponse({"id":id})
+    
+
+class ResultView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = Result.objects.all()
+    serializer_class = ResultSerializer
+    
