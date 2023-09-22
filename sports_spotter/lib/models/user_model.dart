@@ -49,4 +49,9 @@ class UserModel {
     }
     return null;
   }
+
+  @override
+  String toString() {
+    return '$firstName $lastName';
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/event.dart';
 import 'package:sports_spotter/widgets/create_team.dart';
+import 'package:sports_spotter/screens/jointeamscreen.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final EventModel model;
@@ -66,7 +67,14 @@ class EventDetailScreen extends StatelessWidget {
                       space16,
                       Expanded(
                           child: OutlinedButton(
-                              onPressed: () {}, child: const Text('Join team')))
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            JoinTeamScreen(model: model)));
+                              },
+                              child: const Text('Join team')))
                     ],
                   )
                 ],
