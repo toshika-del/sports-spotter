@@ -26,6 +26,7 @@ router = routers.DefaultRouter()
 router.register(r'events', events_views.EventViewSet, basename='events')
 router.register(r'alerts', events_views.AlertViewSet, basename='alerts')
 router.register(r'teams', events_views.TeamView, basename='teams')
+router.register(r'results', events_views.ResultView, basename='results')
 urlpatterns = router.urls
 
 urlpatterns += [

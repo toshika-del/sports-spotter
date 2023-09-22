@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Event, Alert, Team
+from .models import Event, Alert, Team, Result
 
 class EventSerializer(serializers.ModelSerializer):
     
@@ -19,3 +19,9 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = ('id', 'name', 'event', 'captain', 'members', 'size',)
+
+class ResultSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Result
+        fields = ('id', 'event', 'winner')
