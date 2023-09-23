@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/event.dart';
 import 'package:sports_spotter/models/team_model.dart';
@@ -15,6 +16,13 @@ class TeamsByEventScreen extends StatefulWidget {
 }
 
 class _TeamsByEventScreenState extends State<TeamsByEventScreen> {
+  late Future<List<TeamModel?>?> teamsData;
+  @override
+  void initState() {
+    teamsData = TeamModel.getTeamsByEvent(widget.model.id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,32 +34,46 @@ class _TeamsByEventScreenState extends State<TeamsByEventScreen> {
       )),
       body: Center(
         child: FutureBuilder(
-            future: TeamModel.getTeamsByEvent(widget.model.id),
+            future: teamsData,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final teams = snapshot.data!;
                 if (teams.isEmpty) {
-                  return NothingToShow(refresh: () {});
+                  return NothingToShow(refresh: () {
+                    setState(() {
+                      teamsData = TeamModel.getTeamsByEvent(widget.model.id);
+                    });
+                  });
                 }
-                return ListView.separated(
-                    itemCount: teams.length,
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemBuilder: (context, index) => ListTile(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                useSafeArea: true,
-                                showDragHandle: true,
-                                builder: (context) => Container(
-                                    width: double.maxFinite,
-                                    padding: paddingAll24,
-                                    child: TeamDetails(model: teams[index]!)));
-                          },
-                          title: Text(teams[index]!.name),
-                          leading: const Icon(FontAwesomeIcons.users),
-                          subtitle: Text(teams[index]!.captain.username),
-                        ));
+                return LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  color: primaryColor,
+                  onRefresh: () async {
+                    setState(() {
+                      teamsData = TeamModel.getTeamsByEvent(widget.model.id);
+                    });
+                  },
+                  child: ListView.separated(
+                      itemCount: teams.length,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) => ListTile(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  useSafeArea: true,
+                                  showDragHandle: true,
+                                  builder: (context) => Container(
+                                      width: double.maxFinite,
+                                      padding: paddingAll24,
+                                      child:
+                                          TeamDetails(model: teams[index]!)));
+                            },
+                            title: Text(teams[index]!.name),
+                            leading: const Icon(FontAwesomeIcons.users),
+                            subtitle: Text(teams[index]!.captain.username),
+                          )),
+                );
               }
               return loader;
             }),
