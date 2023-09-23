@@ -133,6 +133,32 @@ class TeamModel {
     return null;
   }
 
+  static Future<List<TeamModel?>?> getTeamsByMember(String username) async {
+    final response = await http
+        .get(Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/'));
+    if (response.statusCode == 200) {
+      final List<TeamModel?>? allTeams = await TeamModel.getAllTeams();
+      final List<TeamModel?> myTeams = List.empty(growable: true);
+      for (TeamModel? team in allTeams ?? []) {
+        if (team!.members.any((element) => element?.username == username)) {
+          myTeams.add(team);
+        }
+      }
+      return myTeams;
+    }
+    return null;
+  }
+
+  bool isMyTeam(UserModel user) {
+    return members.any((member) => member?.username == user.username);
+  }
+
+  bool isCreatedByMe(UserModel user) {
+    return captain.username == user.username;
+  }
+
+  Future<void> deleteTeam() async {}
+
   @override
   String toString() {
     return name;

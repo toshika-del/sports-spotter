@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
+import 'package:sports_spotter/models/user_model.dart';
+import 'package:sports_spotter/screens/myteamsscreen.dart';
 import 'package:sports_spotter/widgets/profile_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -27,15 +29,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 200,
           ),
           FutureBuilder(
-              future: Auth.getUser(),
+              future: UserModel.getCurrentUser(),
               builder: (context, snapshot) {
                 final data = snapshot.data;
                 if (data != null) {
                   return ProfileDetails(
-                      firstName: data['first_name'],
-                      lastName: data['last_name'],
-                      username: data['username'],
-                      email: data['email']);
+                    user: snapshot.data!,
+                  );
                 }
                 return loader;
               }),
@@ -50,6 +50,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: const Text('Results And Rankings'),
             subtitle: const Text('Check event results and rankings'),
             onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Teams'),
+            subtitle: const Text('Teams created and joined by me'),
+            onTap: () async {
+              UserModel.getCurrentUser().then((user) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyTeamsScreen(user: user!)));
+              });
+            },
           ),
           const Divider(),
           ListTile(

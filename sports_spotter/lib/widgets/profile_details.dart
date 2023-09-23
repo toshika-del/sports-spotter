@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
+import 'package:sports_spotter/models/user_model.dart';
 
 class ProfileDetails extends StatelessWidget {
-  final String firstName;
-  final String lastName;
-  final String username;
-  final String email;
-  const ProfileDetails(
-      {super.key,
-      required this.firstName,
-      required this.lastName,
-      required this.username,
-      required this.email});
+  final UserModel user;
+  const ProfileDetails({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +16,14 @@ class ProfileDetails extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '$firstName $lastName',
+            '${user.firstName} ${user.lastName}',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
-            username,
+            user.username,
             style: const TextStyle(fontSize: 16, color: Colors.black),
           ),
-          Text(email),
+          Text(user.email),
         ],
       ),
     );
