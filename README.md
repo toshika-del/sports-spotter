@@ -1,2 +1,2 @@
 # sports-spotter
-Sports Spotter mobile application
+Sports Spotter mobile application and server
