@@ -30,6 +30,6 @@ jobs:
         cd sports_spotter_api
         python manage.py test
       env:
-        secret_key: ${{secrets.SECRET_KEY}}
-        debug: ${{secrets.DEBUG}}
-        allowed_hosts: ${{secrets.ALLOWED_HOSTS}}
+        SECRET_KEY: ${{secrets.SECRET_KEY}}
+        DEBUG: ${{secrets.DEBUG}}
+        ALLOWED_HOSTS: ${{secrets.ALLOWED_HOSTS}}
