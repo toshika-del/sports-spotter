@@ -32,3 +32,4 @@ jobs:
       env:
         secret_key: ${{secrets.SECRET_KEY}}
         debug: ${{secrets.DEBUG}}
+        allowed_hosts: ${{secrets.ALLOWED_HOSTS}}
