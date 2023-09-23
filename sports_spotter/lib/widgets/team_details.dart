@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/team_model.dart';
+import 'package:sports_spotter/models/user_model.dart';
 
 class TeamDetails extends StatelessWidget {
   final TeamModel model;
-  const TeamDetails({super.key, required this.model});
+  final UserModel user;
+  final Function() callback;
+  const TeamDetails(
+      {super.key,
+      required this.model,
+      required this.user,
+      required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +36,68 @@ class TeamDetails extends StatelessWidget {
           child: ListView.builder(
               itemCount: model.members.length,
               itemBuilder: (context, index) => ListTile(
-                    title: Text(model.members[index].toString()),
-                    subtitle: Text(model.members[index]!.username),
+                    title: Text(
+                      model.members[index].toString(),
+                      style: TextStyle(
+                          color: user.username == model.members[index]?.username
+                              ? primaryColor
+                              : null),
+                    ),
+                    subtitle: Text(
+                      model.members[index]!.username,
+                      style: TextStyle(
+                          color: user.username == model.members[index]?.username
+                              ? primaryColor
+                              : null),
+                    ),
                   )),
         )),
-        FilledButton(
-            onPressed: model.members.length < model.size ? () {} : null,
-            child: const Text('Join Team')),
+        Row(
+          children: [
+            Expanded(
+              child: FilledButton(
+                  onPressed: model.members.length < model.size &&
+                          !model.isCreatedByMe(user)
+                      ? () async {
+                          showDialog(
+                              context: context, builder: (context) => loader);
+                          (model.isMyTeam(user)
+                                  ? model.removeMember(user.username)
+                                  : model.addMember(user.username))
+                              .then((value) {
+                            if (value != null) {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              showSnackbar(context, const Text('Success!'),
+                                  successColor);
+                            } else {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              showSnackbar(context,
+                                  const Text('Some error occured'), errorColor);
+                            }
+                          });
+                          callback();
+                        }
+                      : null,
+                  child:
+                      Text(model.isMyTeam(user) ? 'Leave Team' : 'Join Team')),
+            ),
+            if (model.isCreatedByMe(user)) space8,
+            if (model.isCreatedByMe(user))
+              Expanded(
+                  child: FilledButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context, builder: (context) => loader);
+                        model.deleteTeam().then((value) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: const Text('Delete Team')))
+          ],
+        ),
         space8,
         FilledButton(
             style: ButtonStyle(
