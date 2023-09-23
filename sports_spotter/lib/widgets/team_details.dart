@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/team_model.dart';
+import 'package:sports_spotter/models/user_model.dart';
 
 class TeamDetails extends StatelessWidget {
   final TeamModel model;
@@ -34,7 +35,31 @@ class TeamDetails extends StatelessWidget {
                   )),
         )),
         FilledButton(
-            onPressed: model.members.length < model.size ? () {} : null,
+            onPressed: model.members.length < model.size
+                ? () async {
+                    showDialog(context: context, builder: (context) => loader);
+                    model
+                        .addMember((await UserModel.getCurrentUser())!.username)
+                        .then((value) {
+                      if (value != null) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        showSnackbar(
+                            context,
+                            Text(
+                              'Joined \'${model.name}\'',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            successColor);
+                      } else {
+                        showSnackbar(context, const Text('Some error occured'),
+                            errorColor);
+                      }
+                    });
+                  }
+                : null,
             child: const Text('Join Team')),
         space8,
         FilledButton(
