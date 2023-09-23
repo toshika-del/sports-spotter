@@ -91,9 +91,22 @@ class TeamDetails extends StatelessWidget {
                         showDialog(
                             context: context, builder: (context) => loader);
                         model.deleteTeam().then((value) {
+                          if (value == 200) {
+                            showSnackbar(
+                                context, Text('\'${model.name}\' deleted'));
+                          } else if (value == 404) {
+                            showSnackbar(
+                                context,
+                                Text('\'${model.name}\' not found'),
+                                errorColor);
+                          } else {
+                            showSnackbar(context,
+                                const Text('Some error occured'), errorColor);
+                          }
                           Navigator.pop(context);
                           Navigator.pop(context);
                         });
+                        callback();
                       },
                       child: const Text('Delete Team')))
           ],
