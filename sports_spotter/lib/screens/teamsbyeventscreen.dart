@@ -6,15 +6,15 @@ import 'package:sports_spotter/models/team_model.dart';
 import 'package:sports_spotter/widgets/nothing_to_show.dart';
 import 'package:sports_spotter/widgets/team_details.dart';
 
-class JoinTeamScreen extends StatefulWidget {
+class TeamsByEventScreen extends StatefulWidget {
   final EventModel model;
-  const JoinTeamScreen({super.key, required this.model});
+  const TeamsByEventScreen({super.key, required this.model});
 
   @override
-  State<JoinTeamScreen> createState() => _JoinTeamScreenState();
+  State<TeamsByEventScreen> createState() => _TeamsByEventScreenState();
 }
 
-class _JoinTeamScreenState extends State<JoinTeamScreen> {
+class _TeamsByEventScreenState extends State<TeamsByEventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
