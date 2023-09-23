@@ -29,3 +29,6 @@ jobs:
       run: |
         cd sports_spotter_api
         python manage.py test
+      env:
+        secret_key: ${{secrets.SECRET_KEY}}
+        debug: ${{secrets.DEBUG}}
