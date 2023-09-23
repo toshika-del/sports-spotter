@@ -54,6 +54,13 @@ class TeamView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
         id = Team.create_team(data['name'],data['captain_username'],data['event_id'],data['size'])
         return JsonResponse({"id":id})
     
+    @staticmethod
+    @api_view(['POST'])
+    def delete(request, id):
+        team = get_object_or_404(Team, id=id)
+        team.delete()
+        return JsonResponse({"detail":"team deleted"})
+    
 
 class ResultView(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Result.objects.all()

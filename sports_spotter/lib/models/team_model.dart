@@ -157,7 +157,11 @@ class TeamModel {
     return captain.username == user.username;
   }
 
-  Future<void> deleteTeam() async {}
+  Future<int> deleteTeam() async {
+    final response = await http.post(Uri.parse(
+        '${Platform.isAndroid ? baseUrl : baseUrlIOS}/delete-team/$id'));
+    return response.statusCode;
+  }
 
   @override
   String toString() {
