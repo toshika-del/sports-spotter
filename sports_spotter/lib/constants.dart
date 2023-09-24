@@ -4,7 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 const title = 'Sports Spotter';
 const version = 'v1.0.0';
-
+const intro =
+    "Introducing Campus Connect, the ultimate sports events hub designed exclusively for college students! Stay in the game and up to date with all the exciting sports happenings on your campus. With Campus Connect, you can effortlessly discover, register for, and participate in a wide range of sports events, from thrilling matches to friendly competitions. Whether you're a die-hard sports enthusiast or looking to try something new, our app has you covered. Get ready to score big on unforgettable college sports experiences with Campus Connect!";
 // Colors
 
 final primaryColor = Colors.blue.shade600;
