@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/result_model.dart';
 import 'package:sports_spotter/widgets/nothing_to_show.dart';
+import 'package:sports_spotter/widgets/result_view.dart';
 
 class ResultsScreen extends StatefulWidget {
   const ResultsScreen({super.key});
@@ -39,17 +41,32 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   });
                 }
                 return LiquidPullToRefresh(
-                  color: primaryColor,
-                  onRefresh: () async {
-                    setState(() {
-                      resultsFuture = ResultModel.getResults();
-                    });
-                  },
-                  child: ListView.builder(
+                    color: primaryColor,
+                    onRefresh: () async {
+                      setState(() {
+                        resultsFuture = ResultModel.getResults();
+                      });
+                    },
+                    child: ListView.separated(
                       itemCount: data.length,
-                      itemBuilder: (context, index) =>
-                          Text(data[index].toString())),
-                );
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) => ListTile(
+                          title: Text(data[index].toString()),
+                          leading: const Icon(FontAwesomeIcons.trophy),
+                          subtitle: Text(data[index]
+                              .declareDate
+                              .toString()
+                              .substring(0, 10)),
+                          onTap: () => showModalBottomSheet(
+                              isScrollControlled: true,
+                              useSafeArea: true,
+                              showDragHandle: true,
+                              context: context,
+                              builder: (context) => Container(
+                                  width: double.maxFinite,
+                                  padding: paddingAll24,
+                                  child: ResultView(result: data[index])))),
+                    ));
               }
               return loader;
             }),

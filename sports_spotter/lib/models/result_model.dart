@@ -53,6 +53,6 @@ class ResultModel {
 
   @override
   String toString() {
-    return '${event?.title ?? 'Event'} result $id';
+    return '${event?.title ?? 'Event'} result';
   }
 }
