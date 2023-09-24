@@ -43,7 +43,7 @@ class Team(Model):
     members = models.ManyToManyField(User,related_name='members')
 
     def __str__(self) -> str:
-        return f"{self.event.title} {self.name}"
+        return f"{self.name} ({self.event.title})"
     
     def add_member(self, username):
         if(self.members.count()<self.size):
@@ -74,6 +74,7 @@ class Result(Model):
     
     event = models.ForeignKey(Event,on_delete=models.CASCADE, null=True)
     winner = models.ForeignKey(Team,on_delete=models.CASCADE, null=True)
+    declare_date = models.DateField(null=True)
 
     def __str__(self) -> str:
-        return self.event.title
+        return f'{self.event.title} result'
