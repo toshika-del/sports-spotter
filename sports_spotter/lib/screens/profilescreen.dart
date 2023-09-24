@@ -108,7 +108,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ListTile(
             title: const Text('About Us'),
             subtitle: const Text('Know more about Sports Spotter'),
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text(
+                          title,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        content: const Text(
+                          intro,
+                          textAlign: TextAlign.justify,
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Close'))
+                        ],
+                      ));
+            },
           ),
           const Divider(),
           ListTile(
