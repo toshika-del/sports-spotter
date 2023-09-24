@@ -49,7 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ListTile(
             title: const Text('Results And Rankings'),
             subtitle: const Text('Check event results and rankings'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/results/');
+            },
           ),
           ListTile(
             title: const Text('Teams'),

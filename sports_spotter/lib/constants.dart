@@ -26,10 +26,9 @@ const space16 = SizedBox(
   height: 16,
   width: 16,
 );
-// Base API Url
 
-const baseUrl = 'http://10.0.2.2:8000';
-const baseUrlIOS = 'http://127.0.0.1:8000';
+// Base API Url
+const baseUrl = 'http://192.168.29.236:8000';
 
 // loaders
 

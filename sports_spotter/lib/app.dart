@@ -4,6 +4,7 @@ import 'package:sports_spotter/controllers/login_home_controller.dart';
 import 'package:sports_spotter/screens/feedbackscreen.dart';
 import 'package:sports_spotter/screens/profilescreen.dart';
 import 'package:sports_spotter/screens/registerscreen.dart';
+import 'package:sports_spotter/screens/resultsscreen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -78,6 +79,7 @@ class App extends StatelessWidget {
         '/home/': (context) => const LoginHomeController(),
         '/register/': (context) => const RegisterScreen(),
         '/feedback/': (context) => const FeedbackScreen(),
+        '/results/': (context) => const ResultsScreen(),
       },
     );
   }

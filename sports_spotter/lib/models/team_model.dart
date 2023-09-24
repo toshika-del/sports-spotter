@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/user_model.dart';
@@ -32,8 +30,7 @@ class TeamModel {
       "event_id": eventId,
       "size": size
     };
-    final response = await http.post(
-        Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/create-team/'),
+    final response = await http.post(Uri.parse('$baseUrl/create-team/'),
         body: jsonEncode(body));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -45,8 +42,7 @@ class TeamModel {
   Future<TeamModel?> addMember(String username) async {
     final body = {"username": username};
     final response = await http.post(
-        Uri.parse(
-            '${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/$id/add-member/'),
+        Uri.parse('$baseUrl/teams/$id/add-member/'),
         body: jsonEncode(body));
     if (response.statusCode == 200) {
       return this;
@@ -57,8 +53,7 @@ class TeamModel {
   Future<TeamModel?> removeMember(String username) async {
     final body = {"username": username};
     final response = await http.post(
-        Uri.parse(
-            '${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/$id/remove-member/'),
+        Uri.parse('$baseUrl/teams/$id/remove-member/'),
         body: jsonEncode(body));
     if (response.statusCode == 200) {
       return this;
@@ -67,8 +62,7 @@ class TeamModel {
   }
 
   static Future<TeamModel?> getTeam(String id) async {
-    final response = await http.get(
-        Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/$id/'));
+    final response = await http.get(Uri.parse('$baseUrl/teams/$id/'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body)['data'];
       final captain = await UserModel.getUserById(
@@ -90,8 +84,7 @@ class TeamModel {
   }
 
   static Future<List<TeamModel?>?> getAllTeams() async {
-    final response = await http
-        .get(Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/'));
+    final response = await http.get(Uri.parse('$baseUrl/teams/'));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['data'];
       final List<TeamModel?> teams = List.empty(growable: true);
@@ -104,8 +97,7 @@ class TeamModel {
   }
 
   static Future<List<TeamModel?>?> getTeamsByEvent(String eventId) async {
-    final response = await http
-        .get(Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/'));
+    final response = await http.get(Uri.parse('$baseUrl/teams/'));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['data'];
       final List<TeamModel?> teams = List.empty(growable: true);
@@ -118,8 +110,7 @@ class TeamModel {
   }
 
   static Future<List<TeamModel?>?> getTeamsByCaptain(String username) async {
-    final response = await http
-        .get(Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/'));
+    final response = await http.get(Uri.parse('$baseUrl/teams/'));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['data'];
       final List<TeamModel?> teams = List.empty(growable: true);
@@ -134,8 +125,7 @@ class TeamModel {
   }
 
   static Future<List<TeamModel?>?> getTeamsByMember(String username) async {
-    final response = await http
-        .get(Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/teams/'));
+    final response = await http.get(Uri.parse('$baseUrl/teams/'));
     if (response.statusCode == 200) {
       final List<TeamModel?>? allTeams = await TeamModel.getAllTeams();
       final List<TeamModel?> myTeams = List.empty(growable: true);
@@ -158,8 +148,7 @@ class TeamModel {
   }
 
   Future<int> deleteTeam() async {
-    final response = await http.post(Uri.parse(
-        '${Platform.isAndroid ? baseUrl : baseUrlIOS}/delete-team/$id'));
+    final response = await http.post(Uri.parse('$baseUrl/delete-team/$id'));
     return response.statusCode;
   }
 
