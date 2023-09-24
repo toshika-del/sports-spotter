@@ -24,4 +24,4 @@ class ResultSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Result
-        fields = ('id', 'event', 'winner')
+        fields = ('id', 'event', 'winner', 'declare_date')
