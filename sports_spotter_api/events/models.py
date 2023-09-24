@@ -61,6 +61,7 @@ class Team(Model):
         captain = get_object_or_404(User, username=captain_username)
         event = get_object_or_404(Event, id=event_id)
         team = Team.objects.create(name=name,captain=captain,event=event,size=size)
+        team.add_member(captain_username)
         team.save()
         return team.id
 
