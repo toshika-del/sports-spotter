@@ -70,7 +70,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: const Text('Contact Us'),
             subtitle:
                 const Text('Contact sports department for any issue or query'),
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                        child: Padding(
+                          padding: paddingAll16,
+                          child:
+                              Column(mainAxisSize: MainAxisSize.min, children: [
+                            const Text(
+                              'Contact Us',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
+                            space8,
+                            const Icon(
+                              Icons.email,
+                              size: 72,
+                            ),
+                            const Text(
+                              'Email: email@example.com',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const Text('Phone: 9876543210',
+                                style: TextStyle(fontSize: 16)),
+                            space16,
+                            FilledButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Close'))
+                          ]),
+                        ),
+                      ));
+            },
           ),
           ListTile(
             title: const Text('About Us'),
