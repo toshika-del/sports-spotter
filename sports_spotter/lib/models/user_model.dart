@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
@@ -19,8 +18,7 @@ class UserModel {
       required this.lastName});
 
   static Future<UserModel?> getUserById(String id) async {
-    final response = await http.get(Uri.parse(
-        '${Platform.isAndroid ? baseUrl : baseUrlIOS}/get-user-by-id/$id'));
+    final response = await http.get(Uri.parse('$baseUrl/get-user-by-id/$id'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body)['data'];
       return UserModel(
@@ -35,8 +33,7 @@ class UserModel {
 
   static Future<UserModel?> getCurrentUser() async {
     final body = {"token": Auth.token};
-    final response = await http.post(
-        Uri.parse('${Platform.isAndroid ? baseUrl : baseUrlIOS}/get_user/'),
+    final response = await http.post(Uri.parse('$baseUrl/get_user/'),
         body: jsonEncode(body));
     if (response.statusCode == 200) {
       final data = json.decode(response.body)['data'];
