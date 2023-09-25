@@ -5,6 +5,7 @@ import 'package:sports_spotter/components/alerts.dart';
 import 'package:sports_spotter/components/events_calandar.dart';
 import 'package:sports_spotter/components/home.dart';
 import 'package:sports_spotter/constants.dart';
+import 'package:sports_spotter/widgets/add_event.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,7 +61,16 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Icon(Icons.add),
               onPressed: () {
                 showModalBottomSheet(
-                    context: context, builder: (context) => Container());
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    showDragHandle: true,
+                    context: context,
+                    builder: (context) => const SingleChildScrollView(
+                          child: Padding(
+                            padding: paddingAll24,
+                            child: AddEvent(),
+                          ),
+                        ));
               })
           : null,
     );
