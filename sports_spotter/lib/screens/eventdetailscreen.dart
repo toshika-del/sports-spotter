@@ -51,32 +51,34 @@ class EventDetailScreen extends StatelessWidget {
                       'Last date: ${model.lastDate.toLocal().toString().substring(0, 16)}',
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   space16,
-                  Row(
-                    children: [
-                      Expanded(
-                          child: FilledButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    useSafeArea: true,
-                                    showDragHandle: true,
-                                    context: context,
-                                    builder: (context) =>
-                                        CreateTeamWidget(model: model));
-                              },
-                              child: const Text('Create team'))),
-                      space16,
-                      Expanded(
-                          child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TeamsByEventScreen(model: model)));
-                              },
-                              child: const Text('Join team')))
-                    ],
-                  )
+                  if (model.lastDate.compareTo(DateTime.now()) > 0)
+                    Row(
+                      children: [
+                        Expanded(
+                            child: FilledButton(
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                      useSafeArea: true,
+                                      showDragHandle: true,
+                                      context: context,
+                                      builder: (context) =>
+                                          CreateTeamWidget(model: model));
+                                },
+                                child: const Text('Create team'))),
+                        space16,
+                        Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TeamsByEventScreen(
+                                                  model: model)));
+                                },
+                                child: const Text('Join team')))
+                      ],
+                    )
                 ],
               ),
             )));
