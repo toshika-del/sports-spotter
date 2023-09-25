@@ -41,6 +41,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   loading_animation_widget: ^1.2.0+4
   url_launcher: ^6.1.14
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
