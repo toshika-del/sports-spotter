@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/components/alerts.dart';
 import 'package:sports_spotter/components/events_calandar.dart';
 import 'package:sports_spotter/components/home.dart';
@@ -54,6 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
+      floatingActionButton: Auth.isStaff && navIndex == 0
+          ? FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context, builder: (context) => Container());
+              })
+          : null,
     );
   }
 }
