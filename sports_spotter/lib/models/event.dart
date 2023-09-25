@@ -11,6 +11,7 @@ class EventModel {
   final String imgUrl;
   final DateTime postedOn;
   final DateTime lastDate;
+  final DateTime eventDate;
   const EventModel({
     required this.id,
     required this.title,
@@ -18,6 +19,7 @@ class EventModel {
     required this.imgUrl,
     required this.postedOn,
     required this.lastDate,
+    required this.eventDate,
   });
 
   @override
@@ -32,13 +34,13 @@ class EventModel {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body)['data'];
       return EventModel(
-        id: data['id'],
-        title: data['attributes']['title'],
-        description: data['attributes']['description'],
-        imgUrl: data['attributes']['image_url'],
-        postedOn: DateTime.parse(data['attributes']['activate_date']),
-        lastDate: DateTime.parse(data['attributes']['deactivate_date']),
-      );
+          id: data['id'],
+          title: data['attributes']['title'],
+          description: data['attributes']['description'],
+          imgUrl: data['attributes']['image_url'],
+          postedOn: DateTime.parse(data['attributes']['activate_date']),
+          lastDate: DateTime.parse(data['attributes']['deactivate_date']),
+          eventDate: DateTime.parse(data['attributes']['event_date']));
     }
     return null;
   }
