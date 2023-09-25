@@ -12,13 +12,14 @@ Future<List<EventModel>?> fetchPosts() async {
     final List<dynamic> data = json.decode(response.body)['data'];
     final content = data
         .map((item) => EventModel(
-              id: item['id'],
-              title: item['attributes']['title'],
-              description: item['attributes']['description'],
-              imgUrl: item['attributes']['image_url'],
-              postedOn: DateTime.parse(item['attributes']['activate_date']),
-              lastDate: DateTime.parse(item['attributes']['deactivate_date']),
-            ))
+            id: item['id'],
+            title: item['attributes']['title'],
+            description: item['attributes']['description'],
+            imgUrl: item['attributes']['image_url'],
+            status: (item['attributes']['status'] == 1),
+            postedOn: DateTime.parse(item['attributes']['activate_date']),
+            lastDate: DateTime.parse(item['attributes']['deactivate_date']),
+            eventDate: DateTime.parse(item['attributes']['event_date'])))
         .toList();
     return content;
   }
