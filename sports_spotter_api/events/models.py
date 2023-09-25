@@ -12,6 +12,7 @@ class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
         verbose_name_plural = "Event"
         ordering = ["id"]
 
+    event_date = models.DateTimeField(null=True)
     image_url = models.URLField(max_length=10000, default='')
 
     def __str__(self) -> str:
