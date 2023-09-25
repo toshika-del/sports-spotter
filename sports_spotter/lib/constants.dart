@@ -9,6 +9,7 @@ const intro =
 // Colors
 
 final primaryColor = Colors.blue.shade600;
+final primaryColorLight = Colors.blue.shade300;
 final secondaryColor = Colors.grey.shade300;
 final errorColor = Colors.red.shade300;
 final successColor = Colors.green.shade400;
