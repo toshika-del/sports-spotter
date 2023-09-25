@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:sports_spotter/api/auth.dart';
+import 'package:sports_spotter/api/posts.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,6 +39,16 @@ class EventModel {
         postedOn: DateTime.parse(data['attributes']['activate_date']),
         lastDate: DateTime.parse(data['attributes']['deactivate_date']),
       );
+    }
+    return null;
+  }
+
+  static Future<List<EventModel>?> getEventsByDay(DateTime day) async {
+    final events = await fetchPosts();
+    List<EventModel> eventForDay = [];
+    if (events != null) {
+      eventForDay = events.where((event) => event.lastDate == day).toList();
+      return eventForDay;
     }
     return null;
   }
