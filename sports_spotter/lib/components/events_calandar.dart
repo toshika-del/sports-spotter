@@ -86,7 +86,7 @@ class _EventsCalandarState extends State<EventsCalandar> {
                                     leading: const Icon(Icons.event),
                                     title: Text(value[index].title),
                                     subtitle: Text(value[index]
-                                        .lastDate
+                                        .eventDate
                                         .toString()
                                         .substring(0, 16)),
                                     onTap: () => Navigator.push(
@@ -107,7 +107,7 @@ class _EventsCalandarState extends State<EventsCalandar> {
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return loader;
           }
-          return ErrorMessage(refresh: () {});
+          return Center(child: ErrorMessage(refresh: () {}));
         }));
   }
 
@@ -115,7 +115,7 @@ class _EventsCalandarState extends State<EventsCalandar> {
     return events
         .where((e) =>
             day.toString().substring(0, 10) ==
-            e.lastDate.toString().substring(0, 10))
+            e.eventDate.toString().substring(0, 10))
         .toList();
   }
 }

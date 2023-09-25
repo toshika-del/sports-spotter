@@ -10,9 +10,11 @@ class Event(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Event"
-        ordering = ["id"]
+        ordering = ["event_date"]
 
     event_date = models.DateTimeField(null=True)
+    activate_date = models.DateField(null=True)
+    deactivate_date = models.DateField(null=True)
     image_url = models.URLField(max_length=10000, default='')
 
     def __str__(self) -> str:
@@ -24,7 +26,7 @@ class Alert(TimeStampedModel, ActivatorModel, TitleDescriptionModel, Model):
     class Meta:
         verbose_name = "Alert"
         verbose_name_plural = "Alerts"
-        ordering = ["id"]
+        ordering = ['activate_date']
 
     def __str__(self) -> str:
         return self.title
@@ -35,7 +37,7 @@ class Team(Model):
     class Meta:
         verbose_name = "Team"
         verbose_name_plural = "Teams"
-        ordering = ["id"]
+        ordering = ["name"]
 
     name = models.CharField(default='Team', null=False, max_length=1000)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
@@ -71,7 +73,7 @@ class Result(Model):
     class Meta:
         verbose_name = "Result"
         verbose_name_plural = "Results"
-        ordering = ["id"]
+        ordering = ["declare_date"]
     
     event = models.ForeignKey(Event,on_delete=models.CASCADE, null=True)
     winner = models.ForeignKey(Team,on_delete=models.CASCADE, null=True)

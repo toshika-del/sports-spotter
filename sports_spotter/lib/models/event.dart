@@ -12,15 +12,16 @@ class EventModel {
   final DateTime postedOn;
   final DateTime lastDate;
   final DateTime eventDate;
-  const EventModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.imgUrl,
-    required this.postedOn,
-    required this.lastDate,
-    required this.eventDate,
-  });
+  final bool status;
+  const EventModel(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.imgUrl,
+      required this.postedOn,
+      required this.lastDate,
+      required this.eventDate,
+      required this.status});
 
   @override
   String toString() {
@@ -40,7 +41,8 @@ class EventModel {
           imgUrl: data['attributes']['image_url'],
           postedOn: DateTime.parse(data['attributes']['activate_date']),
           lastDate: DateTime.parse(data['attributes']['deactivate_date']),
-          eventDate: DateTime.parse(data['attributes']['event_date']));
+          eventDate: DateTime.parse(data['attributes']['event_date']),
+          status: (data['attributes']['status'] == 1));
     }
     return null;
   }

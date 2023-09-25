@@ -31,7 +31,8 @@ class _HomeState extends State<Home> {
             future: response,
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
-                final data = snapshot.data!;
+                var data = snapshot.data!;
+                data = data.where((element) => element.status).toList();
                 if (data.isEmpty) {
                   return NothingToShow(
                     refresh: () {

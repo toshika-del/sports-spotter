@@ -39,19 +39,23 @@ class EventDetailScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
+                      'Date: ${model.eventDate.toLocal().toString().substring(0, 16)}',
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  space8,
+                  Text(
                     model.description,
                     style: const TextStyle(fontSize: 16),
                   ),
                   space8,
                   Text(
-                    'Posted on: ${model.postedOn.toLocal().toString().substring(0, 16)}',
+                    'Posted on: ${model.postedOn.toLocal().toString().substring(0, 10)}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                      'Last date: ${model.lastDate.toLocal().toString().substring(0, 16)}',
+                      'Last registration date: ${model.lastDate.toLocal().toString().substring(0, 10)}',
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   space16,
-                  if (model.lastDate.compareTo(DateTime.now()) > 0)
+                  if (model.lastDate.compareTo(DateTime.now()) >= 0)
                     Row(
                       children: [
                         Expanded(

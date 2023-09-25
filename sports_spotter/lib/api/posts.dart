@@ -16,6 +16,7 @@ Future<List<EventModel>?> fetchPosts() async {
             title: item['attributes']['title'],
             description: item['attributes']['description'],
             imgUrl: item['attributes']['image_url'],
+            status: (item['attributes']['status'] == 1),
             postedOn: DateTime.parse(item['attributes']['activate_date']),
             lastDate: DateTime.parse(item['attributes']['deactivate_date']),
             eventDate: DateTime.parse(item['attributes']['event_date'])))
