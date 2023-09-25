@@ -10,7 +10,7 @@ class AlertModel {
       required this.description,
       required this.sentOn}) {
     final now = DateTime.now();
-    if (sentOn.difference(sentOn).inDays != 0) {
+    if (now.difference(sentOn).inDays != 0) {
       timeAgo = '${now.difference(sentOn).inDays.toString()} Days ago';
     } else if (now.difference(sentOn).inHours != 0) {
       timeAgo = '${now.difference(sentOn).inHours.toString()} Hours ago';
