@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/components/alerts.dart';
 import 'package:sports_spotter/components/events_calandar.dart';
 import 'package:sports_spotter/components/home.dart';
 import 'package:sports_spotter/constants.dart';
-import 'package:sports_spotter/widgets/add_event.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,14 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamed(context, '/profile/');
             },
             icon: const Icon(FontAwesomeIcons.solidUser)),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {},
-        //       icon: const Icon(
-        //         FontAwesomeIcons.magnifyingGlass,
-        //         size: 20,
-        //       ))
-        // ],
       ),
       body: IndexedStack(
         index: navIndex,
@@ -56,23 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      floatingActionButton: Auth.isStaff && navIndex == 0
-          ? FloatingActionButton(
-              child: const Icon(Icons.add),
-              onPressed: () {
-                showModalBottomSheet(
-                    isScrollControlled: true,
-                    useSafeArea: true,
-                    showDragHandle: true,
-                    context: context,
-                    builder: (context) => const SingleChildScrollView(
-                          child: Padding(
-                            padding: paddingAll24,
-                            child: AddEvent(),
-                          ),
-                        ));
-              })
-          : null,
     );
   }
 }
