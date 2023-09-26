@@ -40,12 +40,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return loader;
               }),
           const Divider(),
-          ListTile(
-            title: const Text('Performane Tracking'),
-            subtitle:
-                const Text('Track all time performance and perks in sports'),
-            onTap: () {},
-          ),
+          if (Auth.isStaff)
+            ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, '/admin_panel/');
+              },
+              title: const Text('Admin panel'),
+              subtitle: const Text('Manage events, alerts, results and more'),
+            ),
+          if (!Auth.isStaff)
+            ListTile(
+              title: const Text('Performane Tracking'),
+              subtitle:
+                  const Text('Track all time performance and perks in sports'),
+              onTap: () {},
+            ),
           ListTile(
             title: const Text('Results And Rankings'),
             subtitle: const Text('Check event results and rankings'),
@@ -53,18 +62,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.pushNamed(context, '/results/');
             },
           ),
-          ListTile(
-            title: const Text('Teams'),
-            subtitle: const Text('Teams created and joined by me'),
-            onTap: () async {
-              UserModel.getCurrentUser().then((user) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyTeamsScreen(user: user!)));
-              });
-            },
-          ),
+          if (!Auth.isStaff)
+            ListTile(
+              title: const Text('Teams'),
+              subtitle: const Text('Teams created and joined by me'),
+              onTap: () async {
+                UserModel.getCurrentUser().then((user) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyTeamsScreen(user: user!)));
+                });
+              },
+            ),
           const Divider(),
           ListTile(
             title: const Text('Contact Us'),
