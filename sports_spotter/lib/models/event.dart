@@ -56,4 +56,23 @@ class EventModel {
     }
     return null;
   }
+
+  static Future<int> createEvent(
+      {required String title,
+      required String description,
+      required String imageUrl,
+      required String lastDate,
+      required String eventDate}) async {
+    final headers = {'Authorization': 'Token ${Auth.token}'};
+    final body = {
+      "title": title,
+      "description": description,
+      "image_url": imageUrl,
+      "deactivate_date": lastDate,
+      "event_date": eventDate
+    };
+    final response = await http.post(Uri.parse('$baseUrl/create-event/'),
+        headers: headers, body: jsonEncode(body));
+    return response.statusCode;
+  }
 }

@@ -9,6 +9,8 @@ class Auth {
     return _token;
   }
 
+  static var isStaff = false;
+
   static Stream<String?> tokenChanges =
       Stream.periodic(const Duration(seconds: 1), (v) {
     return _token;
@@ -19,7 +21,9 @@ class Auth {
     final response =
         await http.post(Uri.parse('$baseUrl/login/'), body: jsonEncode(body));
     if (response.statusCode == 200) {
-      _token = '${jsonDecode(response.body)['token']}';
+      final Map data = jsonDecode(response.body);
+      _token = '${data['token']}';
+      isStaff = data['user']['is_staff'];
       return jsonDecode('{"status_code":200, "body": ${response.body}}');
     }
     return {"status_code": response.statusCode};

@@ -9,13 +9,15 @@ class UserModel {
   final String id;
   final String firstName;
   final String lastName;
+  final bool isStaff;
 
   UserModel(
       {required this.username,
       required this.email,
       required this.id,
       required this.firstName,
-      required this.lastName});
+      required this.lastName,
+      required this.isStaff});
 
   static Future<UserModel?> getUserById(String id) async {
     final response = await http.get(Uri.parse('$baseUrl/get-user-by-id/$id'));
@@ -26,7 +28,8 @@ class UserModel {
           email: data['attributes']['email'],
           id: data['id'],
           firstName: data['attributes']['first_name'],
-          lastName: data['attributes']['last_name']);
+          lastName: data['attributes']['last_name'],
+          isStaff: data['attributes']['is_staff']);
     }
     return null;
   }
@@ -36,13 +39,14 @@ class UserModel {
     final response = await http.post(Uri.parse('$baseUrl/get_user/'),
         body: jsonEncode(body));
     if (response.statusCode == 200) {
-      final data = json.decode(response.body)['data'];
+      final Map data = json.decode(response.body)['data'];
       return UserModel(
           username: data['attributes']['username'],
           email: data['attributes']['email'],
           id: data['id'],
           firstName: data['attributes']['first_name'],
-          lastName: data['attributes']['last_name']);
+          lastName: data['attributes']['last_name'],
+          isStaff: data['attributes']['is_staff']);
     }
     return null;
   }

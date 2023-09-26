@@ -15,6 +15,15 @@ class EventViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
 
+    @staticmethod
+    @api_view(['POST'])
+    def create_event(request):
+        data = JSONParser().parse(request)
+        event_serializer = EventSerializer(data=data)
+        if event_serializer.is_valid():
+            event_serializer.save()
+            return JsonResponse({"details":f"{data['title']} event created"})
+        return JsonResponse(event_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class AlertViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
 
