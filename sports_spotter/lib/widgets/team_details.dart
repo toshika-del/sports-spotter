@@ -52,65 +52,53 @@ class TeamDetails extends StatelessWidget {
                     ),
                   )),
         )),
-        Row(
-          children: [
-            Expanded(
-              child: FilledButton(
-                  onPressed: model.members.length < model.size &&
-                          !model.isCreatedByMe(user)
-                      ? () async {
-                          showDialog(
-                              context: context, builder: (context) => loader);
-                          (model.isMyTeam(user)
-                                  ? model.removeMember(user.username)
-                                  : model.addMember(user.username))
-                              .then((value) {
-                            if (value != null) {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              showSnackbar(context, const Text('Success!'),
-                                  successColor);
-                            } else {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              showSnackbar(context,
-                                  const Text('Some error occured'), errorColor);
-                            }
-                          });
-                          callback();
-                        }
-                      : null,
-                  child:
-                      Text(model.isMyTeam(user) ? 'Leave Team' : 'Join Team')),
-            ),
-            if (model.isCreatedByMe(user)) space8,
-            if (model.isCreatedByMe(user))
-              Expanded(
-                  child: FilledButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context, builder: (context) => loader);
-                        model.deleteTeam().then((value) {
-                          if (value == 200) {
-                            showSnackbar(
-                                context, Text('\'${model.name}\' deleted'));
-                          } else if (value == 404) {
-                            showSnackbar(
-                                context,
-                                Text('\'${model.name}\' not found'),
-                                errorColor);
-                          } else {
-                            showSnackbar(context,
-                                const Text('Some error occured'), errorColor);
-                          }
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        });
-                        callback();
-                      },
-                      child: const Text('Delete Team')))
-          ],
-        ),
+        if (!model.isCreatedByMe(user))
+          if (model.members.length < model.size || model.isMyTeam(user)) space8,
+        if (!model.isCreatedByMe(user))
+          if (model.members.length < model.size || model.isMyTeam(user))
+            FilledButton(
+                onPressed: () async {
+                  showDialog(context: context, builder: (context) => loader);
+                  (model.isMyTeam(user)
+                          ? model.removeMember(user.username)
+                          : model.addMember(user.username))
+                      .then((value) {
+                    if (value != null) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      showSnackbar(
+                          context, const Text('Success!'), successColor);
+                    } else {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      showSnackbar(context, const Text('Some error occured'),
+                          errorColor);
+                    }
+                  });
+                  callback();
+                },
+                child: Text(model.isMyTeam(user) ? 'Leave Team' : 'Join Team')),
+        if (model.isCreatedByMe(user)) space8,
+        if (model.isCreatedByMe(user))
+          FilledButton(
+              onPressed: () {
+                showDialog(context: context, builder: (context) => loader);
+                model.deleteTeam().then((value) {
+                  if (value == 200) {
+                    showSnackbar(context, Text('\'${model.name}\' deleted'));
+                  } else if (value == 404) {
+                    showSnackbar(context, Text('\'${model.name}\' not found'),
+                        errorColor);
+                  } else {
+                    showSnackbar(
+                        context, const Text('Some error occured'), errorColor);
+                  }
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                });
+                callback();
+              },
+              child: const Text('Delete Team')),
         space8,
         FilledButton(
             style: ButtonStyle(

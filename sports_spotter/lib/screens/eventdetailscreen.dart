@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/event.dart';
 import 'package:sports_spotter/widgets/create_team.dart';
@@ -55,7 +56,8 @@ class EventDetailScreen extends StatelessWidget {
                       'Last registration date: ${model.lastDate.toLocal().toString().substring(0, 10)}',
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   space16,
-                  if (model.lastDate.compareTo(DateTime.now()) >= 0)
+                  if (model.lastDate.compareTo(DateTime.now()) >= 0 &&
+                      !Auth.isStaff)
                     Row(
                       children: [
                         Expanded(

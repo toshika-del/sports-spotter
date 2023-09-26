@@ -24,14 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamed(context, '/profile/');
             },
             icon: const Icon(FontAwesomeIcons.solidUser)),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {},
-        //       icon: const Icon(
-        //         FontAwesomeIcons.magnifyingGlass,
-        //         size: 20,
-        //       ))
-        // ],
       ),
       body: IndexedStack(
         index: navIndex,
