@@ -39,6 +39,9 @@ class _AlertsState extends State<Alerts> {
                   );
                 }
                 final data = snapshot.data!;
+                data.sort((a, b) {
+                  return b.sentOn.compareTo(a.sentOn);
+                });
                 return ListView.separated(
                     padding: paddingAll8,
                     itemCount: data.length,
