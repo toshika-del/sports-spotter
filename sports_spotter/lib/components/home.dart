@@ -18,6 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var response = fetchPosts();
+  final queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return LiquidPullToRefresh(
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
       onRefresh: () async {
         setState(() {
           response = fetchPosts();
+          queryController.clear();
         });
       },
       child: Center(
@@ -37,6 +39,7 @@ class _HomeState extends State<Home> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: TextField(
+                  controller: queryController,
                   onChanged: (value) {
                     setState(() {
                       response = EventModel.search(value);
@@ -60,6 +63,7 @@ class _HomeState extends State<Home> {
                           refresh: () {
                             setState(() {
                               response = fetchPosts();
+                              queryController.clear();
                             });
                           },
                         );
@@ -84,6 +88,7 @@ class _HomeState extends State<Home> {
                       refresh: () {
                         setState(() {
                           response = fetchPosts();
+                          queryController.clear();
                         });
                       },
                     );
