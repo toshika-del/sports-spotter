@@ -48,13 +48,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: const Text('Admin panel'),
               subtitle: const Text('Manage events, alerts, results and more'),
             ),
-          if (!Auth.isStaff)
-            ListTile(
-              title: const Text('Performane Tracking'),
-              subtitle:
-                  const Text('Track all time performance and perks in sports'),
-              onTap: () {},
-            ),
+          // if (!Auth.isStaff)
+          //   ListTile(
+          //     title: const Text('Performane Tracking'),
+          //     subtitle:
+          //         const Text('Track all time performance and perks in sports'),
+          //     onTap: () {},
+          //   ),
           ListTile(
             title: const Text('Results And Rankings'),
             subtitle: const Text('Check event results and rankings'),
