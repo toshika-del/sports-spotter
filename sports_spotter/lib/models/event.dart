@@ -75,4 +75,15 @@ class EventModel {
         headers: headers, body: jsonEncode(body));
     return response.statusCode;
   }
+
+  static Future<List<EventModel>> search(String query) async {
+    final list = await fetchPosts();
+    if (list == null) {
+      return [];
+    }
+    return list
+        .where((element) =>
+            element.title.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
 }
