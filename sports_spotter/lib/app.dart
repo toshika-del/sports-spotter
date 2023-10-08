@@ -81,7 +81,7 @@ class App extends StatelessWidget {
         '/register/': (context) => const RegisterScreen(),
         '/feedback/': (context) => const FeedbackScreen(),
         '/results/': (context) => const ResultsScreen(),
-        '/admin_panel/': (context) => const AdminPanelScreen()
+        '/admin_panel/': (context) => const AdminPanelScreen(),
       },
     );
   }
