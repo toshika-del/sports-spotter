@@ -4,6 +4,7 @@ import 'package:sports_spotter/api/auth.dart';
 import 'package:sports_spotter/constants.dart';
 import 'package:sports_spotter/models/user_model.dart';
 import 'package:sports_spotter/screens/myteamsscreen.dart';
+import 'package:sports_spotter/screens/performancescreen.dart';
 import 'package:sports_spotter/widgets/profile_details.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -48,13 +49,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: const Text('Admin panel'),
               subtitle: const Text('Manage events, alerts, results and more'),
             ),
-          // if (!Auth.isStaff)
-          //   ListTile(
-          //     title: const Text('Performane Tracking'),
-          //     subtitle:
-          //         const Text('Track all time performance and perks in sports'),
-          //     onTap: () {},
-          //   ),
+          if (!Auth.isStaff)
+            ListTile(
+              title: const Text('Performane Tracking'),
+              subtitle:
+                  const Text('Track all time performance and perks in sports'),
+              onTap: () async {
+                UserModel.getCurrentUser().then((user) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PerformanceScreen(user: user!)));
+                });
+              },
+            ),
           ListTile(
             title: const Text('Results And Rankings'),
             subtitle: const Text('Check event results and rankings'),
